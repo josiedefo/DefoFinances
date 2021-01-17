@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>DefoFinances Transactions</title>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+  	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="#">DefoFinances</a>
+            </li>
+        </ul>
+    </div>
+     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Transactions</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Budgets</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Accounts</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Reports</a>
+            </li>
+            <!--li class="nav-item">
+                  <a href="#newTransaction" class="btn btn-primary stretched-link">+ Add Transaction</a>
+            </li-->
+        </ul>
+    </div>	  
+</nav>
+
+<!-- div id="transactions" class="card" style="width: 80rem;">
+  <div class="card-body">
+    <h5 class="card-title">All Transactions</h5>
+    <div class="card-text">
+    	<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Date</th>
+					<th scope="col">Bank Description</th>
+					<th scope="col">Type</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Category</th>
+					<th scope="col">Account</th>
+					<th scope="col">Notes</th>
+					<th scope="col">REC</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="transaction: ${transactions}">
+					<td scope="row" th:text="${transaction.date}">123</td>
+					<td th:text="${transaction.description}">descr</td>
+					<td style="text-align:center">
+						<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'"></span>
+					</td>
+					<td th:text="${transaction.amount}">
+						<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'">amount</span>
+					</td>
+					<td th:text="${transaction.category}">category</td>
+					<td th:text="${transaction.account}">account</td>
+					<td th:text="${transaction.notes}">notes</td>
+					<!-/- td th:text="${transaction.recurrence.type}">rec</td -/->
+					<td th:switch="${transaction.recurrence.type.toString()}">
+					    <span th:case="'MONTHLY'">M</span>
+					    <span th:case="'BIANNUAL'">B</span>
+					    <span th:case="'ANNUAL'">A</span>
+					    <span th:case="'ANNUAL'"></span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>    
+  </div>
+</div -->
+
+<div class="container overflow-hidden">
+	<div class="row gx-5">
+		<div class="col">
+     		<div class="border bg-light">
+     			<div class="card" id="transactions">
+	              <h4 class="card-title">All Transactions</h4> 
+	               <div class="card-text">
+				    	<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Date</th>
+									<th scope="col">Bank Description</th>
+									<th scope="col">Type</th>
+									<th scope="col">Amount</th>
+									<th scope="col">Category</th>
+									<th scope="col">Account</th>
+									<th scope="col">Notes</th>
+									<th scope="col">REC</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="transaction: ${transactions}">
+									<td scope="row" th:text="${transaction.date}">123</td>
+									<td th:text="${transaction.description}">descr</td>
+									<td style="text-align:center">
+										<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'"></span>
+									</td>
+									<td th:text="${transaction.amount}">
+										<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'">amount</span>
+									</td>
+									<td th:text="${transaction.category}">category</td>
+									<td th:text="${transaction.account}">account</td>
+									<td th:text="${transaction.notes}">notes</td>
+									<td th:switch="${transaction.recurrence.type.toString()}">
+									    <span th:case="'MONTHLY'">M</span>
+									    <span th:case="'BIANNUAL'">B</span>
+									    <span th:case="'ANNUAL'">A</span>
+									    <span th:case="'ANNUAL'"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+				    </div>  
+	        	</div>
+     		</div>
+    	</div>
+	
+	  <div class="col">
+      	<div class="border bg-light">
+	      <div class="card" id="newTransaction"> 
+	              <h4 class="card-title">New Transaction</h4> 
+	                <p class="card-text"> 
+	                    <form action="/addtransaction" method="post"  name="transac">
+	                    	<label>Date: </label><input type="date" name="date"/><br/>
+        					
+        					<label>Amount: </label><input type="text" name="amount" value="0.0"/><br/>
+    						
+    						<input type="radio" name="type" value="CREDIT" />Income
+        					<input type="radio" name="type" value="DEBIT" checked="checked"/>Expense
+        					<br/>
+        					<br/>
+        					
+        					<label>Description: </label><input type="text" name="description"/><br/>
+        					<br/>
+        					<label>Category:</label>
+        					<select name="category">
+            					<option value="AUTO_FUEL&GAZ" selected>Fuel</option>
+            					<option value="GIFT">Gift </option>
+            					<option value="RESTAURANTS">Restaurants </option>
+            					<option value="MORTGAGE">Home Mortgage </option>
+            					<option value="HOME_ENERGY">Home Energy</option>
+            					<option value="CAR_INSURANCE">Car Insurance</option>
+        					</select>
+        					<br/>
+        					<label>Bank Account:</label>
+        					<select name="account">
+            					<option value="WF Savings" selected>WF Savings</option>
+            					<option value="Kids Savings">Kids Savings</option>
+            					<option value="Family Checkings">Family Checkings</option>
+            					<option value="Credit card Capital One">Credit card Capital One</option>
+            					<option value="WF Credit Card">WF Credit Card</option>
+        					</select>
+        					<br/>
+        					<label>Note:</label>
+        					<textarea rows="5" cols="25" name="notes"></textarea>
+    						<br/>
+        					<br/>
+        					<label>Recurrence?</label><br/>
+        					<!-- input type="checkbox" name="recurrence" /><br/ -->
+        					<input type="radio" name="recurrence.type" value="ONETIME" checked="checked"/>One Time<br/>
+    						<input type="radio" name="recurrence.type" value="MONTHLY" />Monthly<br/>
+        					<input type="radio" name="recurrence.type" value="BIANNUAL" />Bi-Annual<br/>
+        					<input type="radio" name="recurrence.type" value="ANNUAL" />Annual<br/>
+        					<br/>
+        					<label>Day Of the month: </label><input type="text" name="recurrence.dayOfTheMonth" value="0" maxlength="4" size="4"/><br>
+        					<label>Month Number: </label><input type="text" name="recurrence.monthsOfTheYear" value="0" maxlength="4" size="4"/><br>
+        					<br>           					
+    						<p><input class="btn btn-primary stretched-link" type="submit" value="Submit" /></p>
+    					</form>
+	                </p>
+	        </div> 
+		</div>
+      </div>
+      
+    </div> 
+</div>
+
+</body>
+</html>
