@@ -25,6 +25,12 @@ public class TransactionController {
 		this.transactionRepository = transactionRepository;
 		this.transactionRecurenceRepository = transactionRecurenceRepository;
 	} 
+
+	/*
+	 * @GetMapping("/") public String welcome(Model model) {
+	 * model.addAttribute("transactions", this.transactionRepository.findAll());
+	 * return "transactions/list"; }
+	 */
 	
 	@GetMapping("/transactions")
 	public String getTransactions(Model model) {

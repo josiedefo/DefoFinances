@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+    	<meta charset="UTF-8"/>
+	    <title>DefoFinances Login</title>
+	
+	    <link th:rel="stylesheet" th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}"/>
+	    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    </head>
+    <body>
+	    <nav class="navbar navbar-expand-md navbar-light bg-light">
+		  	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+		        <ul class="navbar-nav mr-auto">
+		            <li class="nav-item">
+		                <a class="navbar-brand" href="#">DefoFinances</a>
+		            </li>
+		        </ul>
+		    </div>	  
+		</nav>
+		
+		<br/>
+		<br/>
+		<div>
+			<div th:if="${param.error}">
+	            Invalid username and password.
+	        </div>
+	        <div th:if="${param.logout}">
+	            You have been logged out.
+	        </div>
+	        <form th:action="@{/login}" method="post">
+	            <div><label> User Name : <input type="text" name="username"/> </label></div>
+	            <div><label> Password: <input type="password" name="password"/> </label></div>
+	            <div><input type="submit" value="Sign In"/></div>
+	        </form>
+        
+		</div>
+        
+    </body>
+</html>
