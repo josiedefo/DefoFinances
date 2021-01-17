@@ -32,56 +32,9 @@
             <li class="nav-item">
                   <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Reports</a>
             </li>
-            <!--li class="nav-item">
-                  <a href="#newTransaction" class="btn btn-primary stretched-link">+ Add Transaction</a>
-            </li-->
         </ul>
     </div>	  
 </nav>
-
-<!-- div id="transactions" class="card" style="width: 80rem;">
-  <div class="card-body">
-    <h5 class="card-title">All Transactions</h5>
-    <div class="card-text">
-    	<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Date</th>
-					<th scope="col">Bank Description</th>
-					<th scope="col">Type</th>
-					<th scope="col">Amount</th>
-					<th scope="col">Category</th>
-					<th scope="col">Account</th>
-					<th scope="col">Notes</th>
-					<th scope="col">REC</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="transaction: ${transactions}">
-					<td scope="row" th:text="${transaction.date}">123</td>
-					<td th:text="${transaction.description}">descr</td>
-					<td style="text-align:center">
-						<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'"></span>
-					</td>
-					<td th:text="${transaction.amount}">
-						<span th:text="${transaction.type.toString() == 'CREDIT'}? '+' : '-'">amount</span>
-					</td>
-					<td th:text="${transaction.category}">category</td>
-					<td th:text="${transaction.account}">account</td>
-					<td th:text="${transaction.notes}">notes</td>
-					<!-/- td th:text="${transaction.recurrence.type}">rec</td -/->
-					<td th:switch="${transaction.recurrence.type.toString()}">
-					    <span th:case="'MONTHLY'">M</span>
-					    <span th:case="'BIANNUAL'">B</span>
-					    <span th:case="'ANNUAL'">A</span>
-					    <span th:case="'ANNUAL'"></span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-    </div>    
-  </div>
-</div -->
 
 <div class="container overflow-hidden">
 	<div class="row gx-5">
