@@ -12,16 +12,17 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-public class TransactionsSecurityConfig extends WebSecurityConfigurerAdapter {
+public class TransactionsWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/home").permitAll()
+				.antMatchers("/","/css/**", "/js/**", "/webjars/**", "/bootstrap", "/assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css", "/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
+				.usernameParameter("username").passwordParameter("password") 
 				.permitAll()
 				.and()
 			.logout()
